@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bootstrap Material Admin by Bootstrapious.com</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="../static/vendor/bootstrap/css/bootstrap.min.css"
+          th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="../static/vendor/font-awesome/css/font-awesome.min.css"
+          th:href="@{/vendor/font-awesome/css/font-awesome.min.css}">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="../static/css/fontastic.css" th:href="@{/css/fontastic.css}">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="../static/css/style.default.css" th:href="@{/css/style.default.css}"
+          id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="../static/css/custom.css" th:href="@{/css/custom.css}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="../static/img/favicon.ico" th:href="@{/img/favicon.ico}">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<body>
+<div class="page">
+    <!-- 引入header -->
+    <div th:replace="commons/header::header"></div>
+
+    <div class="page-content d-flex align-items-stretch">
+        <!-- 引入bar -->
+        <!-- <div th:replace="commons/bar::bar"></div>-->
+        <div th:replace="commons/bar::#bar(activeUri='addcategory')"></div>
+
+        <div class="content-inner">
+            <!-- Page Header-->
+            <header class="page-header">
+                <div class="container-fluid">
+                    <h2 class="no-margin-bottom">Tables</h2>
+                </div>
+            </header>
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-holder container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Tables</li>
+                </ul>
+            </div>
+            <section class="tables">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-close">
+                                    <div class="dropdown">
+                                        <button type="button" id="closeCard5" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i
+                                                class="fa fa-ellipsis-v"></i></button>
+                                        <div aria-labelledby="closeCard5"
+                                             class="dropdown-menu dropdown-menu-right has-shadow"><a href="#"
+                                                                                                     class="dropdown-item remove">
+                                            <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit">
+                                            <i class="fa fa-gear"></i>Edit</a></div>
+                                    </div>
+                                </div>
+                                <div class="card-header d-flex align-items-center">
+                                    <h3 class="h4">新建图书类别</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form class="form-horizontal" id="bookCategoryForm" th:method="post" th:action="@{/book/Category}">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-control-label">编号</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="categoryId" name="categoryId"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-control-label">类别</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="categoryName" name="categoryName"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 offset-sm-3">
+                                                <button type="submit" class="btn btn-primary">添加</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-close">
+                                    <div class="dropdown">
+                                        <button type="button" id="closeCard1" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i
+                                                class="fa fa-ellipsis-v"></i></button>
+                                        <div aria-labelledby="closeCard1"
+                                             class="dropdown-menu dropdown-menu-right has-shadow"><a href="#"
+                                                                                                     class="dropdown-item remove">
+                                            <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit">
+                                            <i class="fa fa-gear"></i>Edit</a></div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>类别编号</th>
+                                                <th>类别名称</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr id="bookCategory"></tr>
+
+                                        <!--    <tr th:each="bookCategory:${bookCategoryList}">
+                                                <th scope="row" th:text="${bookCategory.categoryId}"></th>
+                                                <td th:text="${bookCategory.categoryName}"></td>
+                                                <td>
+                                                    <button id="btn_deleteCategory" class="btn btn-sm btn-danger deleteBtn"
+                                                            th:value="${bookCategory.categoryId}">删除
+                                                    </button>
+                                                </td>
+                                            </tr>-->
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 引入footer -->
+            <div th:replace="commons/footer::footer"></div>
+        </div>
+    </div>
+</div>
+<!-- JavaScript files-->
+<script src="vendor/jquery/jquery.min.js" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script src="vendor/popper.js/umd/popper.min.js" th:src="@{/vendor/popper.js/umd/popper.min.js}"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js" th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js" th:src="@{/vendor/jquery.cookie/jquery.cookie.js}"></script>
+<script src="vendor/chart.js/Chart.min.js" th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+<script src="vendor/jquery-validation/jquery.validate.min.js"
+        th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+<!-- Main File-->
+<script src="js/front.js" th:src="@{/js/front.js}"></script>
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+        //给选择框赋值
+        findAllBookCategory();
+        /*findAllBookCategory();*/
+        $("#bookCategoryForm").validate({
+            rules: {
+                categoryId: {
+                    required: true
+                },
+                categoryName: {
+                    required: true
+                }
+            },
+            messages: {
+                categoryId: {
+                    required: "<font color='red'>请输入编号</font>"
+                },
+                categoryName: {
+                    required: "<font color='red'>请输入类别</font>"
+                }
+            }
+        });
+        var rsg = [[${rsg}]];
+        if (rsg != null) {
+            alert(rsg);
+            var Path = [[${#httpServletRequest.getContextPath()}]];
+            /*添加成功重新加载图书类别*/
+            location.href = Path + "/book/findCategoryAndToAddCategoryPage";
+        }
+
+        //点击删除按钮后删除一行
+        $("td button").click(function () {
+            if (confirm("确认删除?")) {
+
+                var bookCategoryId = $(this).val();
+                // alert(bookCategoryId);
+                deleteBookCategoryById(bookCategoryId);
+                $(this).parent().parent().remove();
+                var Path = [[${#httpServletRequest.getContextPath()}]];
+                /*添加成功重新加载图书类别*/
+                location.href = Path + "/transfer/findCategoryPage";
+            }
+
+        });
+    });
+
+    //ajax删除种类
+    function deleteBookCategoryById(bookCategoryId) {
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/book/deleteCategory",
+            dataType: "json",
+            data: {bookCategoryId: bookCategoryId},
+            success: function (data) {
+                /*alert("删除成功");*/
+            },
+            error: function (data) {
+              /*  alert("删除失败");*/
+            }
+        });
+    }
+
+     function findAllBookCategory() {
+         $.ajax({
+             async: false,
+             type: "get",
+             //ajax的url必须写全路径名
+             url: "/book/bookCategory",
+             dataType: "json",
+             success: function (data) {
+                /* console.log(data);*/
+                 var bookCategorys = $('#bookCategory');
+                 bookCategorys.empty();
+
+                 for (var i = 0; i < data.length; i++) {
+                     var html = "";
+                     var html1 = '<th scope="row">' + data[i].categoryId + '</th>';
+                     var html2 = '<td>' + data[i].categoryName + '</td>';
+                     var html3 = '<td> <button id="btn_deleteCategory" class="btn btn-sm btn-danger deleteBtn" value="'+data[i].categoryId+'">删除</button></td>';
+                     html += html1;
+                     html += html2;
+                     html += html3;
+                     bookCategorys.append(html);
+                 }
+             },
+             error: function (data) {
+                 alert(data.result);
+             }
+         });
+     };
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BookMapper">
+<resultMap id="BookMap" type="com.example.entity.Book">
+    <id column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
+    <result column="book_publish" jdbcType="VARCHAR" property="bookPublish" />
+    <result column="book_category" jdbcType="INTEGER" property="bookCategory" />
+    <result column="book_price" jdbcType="DOUBLE" property="bookPrice" />
+    <result column="book_introduction" jdbcType="VARCHAR" property="bookIntroduction" />
+    <result column="book_amount" javaType="INTEGER" property="BookAmount"/>
+</resultMap>
+    
+    <select id="findAllBook" resultMap="BookMap">
+      SELECT book_id,book_name,book_author,book_publish,book_category,book_price,book_introduction,book_amount
+      FROM book
+    </select>
+
+    <resultMap id="BaseBookCategory" type="com.example.entity.BookCategory">
+        <id column="id" property="id"></id>
+        <result column="category_id" property="categoryId"></result>
+        <result column="category_name" property="categoryName"></result>
+    </resultMap>
+    <select id="findBookCategory" resultMap="BaseBookCategory">
+        SELECT * FROM book_category
+    </select>
+
+    <select id="findCategoryByBooksResult" resultMap="BookMap">
+        SELECT * FROM book WHERE book_category=#{bookCategory}
+    </select>
+
+    <insert id="addBook" parameterType="com.example.entity.Book">
+        INSERT into
+        book (book_id, book_name, book_author,
+        book_publish, book_category, book_price,
+        book_introduction,book_amount)
+        values
+        (#{bookId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{bookAuthor,jdbcType=VARCHAR},
+        #{bookPublish,jdbcType=VARCHAR}, #{bookCategory,jdbcType=INTEGER}, #{bookPrice,jdbcType=DOUBLE},
+        #{bookIntroduction,jdbcType=VARCHAR},#{BookAmount,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="addBookCategory" parameterType="com.example.entity.BookCategory">
+        insert into
+        book_category (category_id, category_name)
+        values
+        (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="deleteBookCategory" parameterType="java.lang.Integer">
+        delete from
+        book_category
+        where
+        category_id = #{bookCategoryId,jdbcType=INTEGER}
+    </delete>
+
+    <select id="findBookIdByBookName" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT book_name FROM book WHERE book_id=#{book_id}
+    </select>
+
+    <insert id="borrowBook" parameterType="com.example.entity.BorrowRecording">
+        INSERT INTO borrowingbooks(user_id,book_id,date,borrow_date)
+        VALUES (#{user_id},#{book_id},#{date},#{returnDateStr})
+    </insert>
+
+    <update id="bookLessOne" parameterType="java.lang.Integer">
+        UPDATE book SET book_amount= book_amount-1 WHERE book_id=#{book_id}
+    </update>
+
+</mapper>

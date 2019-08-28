@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.RoleMapper">
+    <resultMap id="BaseRole" type="com.example.entity.Role">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+    <select id="findRoleByUserId" resultMap="BaseRole">
+        select * from role where id in (select role_id from user_role where user_id=#{id})
+    </select>
+
+    <select id="findAllRole" resultMap="BaseRole">
+        SELECT * FROM role
+    </select>
+</mapper>

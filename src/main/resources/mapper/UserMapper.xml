@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserMapper">
+    <resultMap id="BaseUser" type="com.example.entity.UserInfo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="gender" jdbcType="VARCHAR" property="gender" />
+        <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <collection property="roles" javaType="java.util.ArrayList" column="id" ofType="com.example.entity.Role"
+                    select="com.example.mapper.RoleMapper.findRoleByUserId"></collection>
+    </resultMap>
+    <select id="findByUsername" resultMap="BaseUser" parameterType="java.lang.String">
+        SELECT * FROM USER WHERE username=#{username}
+    </select>
+
+    <insert id="InsertUser" parameterType="com.example.entity.UserInfo" useGeneratedKeys="true" keyProperty="id">
+        <!--<selectKey keyColumn="id" keyProperty="id" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID();
+        </selectKey>-->
+        INSERT INTO USER (phone,username,password,gender,birthday,email)
+        VALUES (#{phone},#{username},#{password},#{gender},#{birthday},#{email})
+    </insert>
+
+    <!--<resultMap id="BaseUserRole" type="com.example.entity.User_Role">
+        <result column="user_id"  property="userId" />
+        <result column="role_id"  property="roleId" />
+    </resultMap>-->
+    
+    <insert id="InsertUserRole" parameterType="com.example.entity.User_Role">
+        INSERT INTO user_role (user_id,role_id)
+        VALUES (#{user_id},#{role_id})
+    </insert>
+
+    <select id="finAllUser" resultMap="BaseUser">
+        SELECT * FROM user
+    </select>
+<!--    -->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+      DELETE FROM USER
+      WHERE id=#{id}
+    </delete>
+    
+    <resultMap id="BaseBorrowRecording" type="com.example.entity.BorrowRecording">
+        <id column="id" property="id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="book_id" property="book_id"/>
+        <result column="date" property="date"/>
+        <result column="borrow_date" property="returnDateStr"/>
+        <association property="username" column="user_id" select="findUserIdByUsername" javaType="java.lang.String"/>
+        <association property="bookname" column="book_id" select="com.example.mapper.BookMapper.findBookIdByBookName" javaType="java.lang.String"/>
+    </resultMap>
+    
+    <select id="findBorrowRecording" resultMap="BaseBorrowRecording">
+        SELECT * FROM borrowingbooks
+    </select>
+
+    <select id="findUserIdByUsername" resultType="java.lang.String" parameterType="java.lang.Integer">
+        SELECT username FROM USER WHERE id=#{user_id}
+    </select>
+
+    <select id="findUsernameByUserId" resultType="java.lang.Integer">
+        SELECT id FROM USER WHERE username=#{username}
+    </select>
+</mapper>

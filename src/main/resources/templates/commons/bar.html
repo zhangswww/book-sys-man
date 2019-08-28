@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <title>bar</title>
+</head>
+<body>
+<!-- Main Navbar-->
+<!-- Side Navbar -->
+<!--<nav class="side-navbar" th:fragment="bar">-->
+<nav class="side-navbar" id="bar">
+    <!-- Sidebar Header-->
+    <div class="sidebar-header d-flex align-items-center">
+        <div class="avatar"><img src="img/avatar-1.jpg" th:src="@{/img/avatar-1.jpg}" alt="..."
+                                 class="img-fluid rounded-circle"></div>
+        <div class="title">
+            <h1 class="h4"><span sec:authentication="name"></span></h1>
+            <span sec:authentication="authorities">
+        </div>
+    </div>
+    <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+    <ul class="list-unstyled"><!-- th:href="@{/index.html}" -->
+        <li th:class="${activeUri=='index'?'active':''}"><a href="/index1" th:href="@{/index1}"> <i class="icon-home"></i>主页 </a></li>
+        <li class="active" th:class="${activeUri=='books'?'active':''}"><a href="tables.html" th:href="@{/book/books}"> <i class="icon-grid"></i>查询图书 </a></li>
+        <div sec:authorize="hasRole('ADMIN')">
+        <li th:class="${activeUri=='addbook'?'active':''}"><a href="charts.html" th:href="@{/transfer/addBook}"> <i class="fa fa-bar-chart"></i>录入新书 </a></li>
+        </div>
+        <div sec:authorize="hasRole('ADMIN')">
+        <li th:class="${activeUri=='addcategory'?'active':''}"><a href="forms.html" th:href="@{/transfer/findCategoryPage}"> <i class="icon-padnote"></i>新建类别 </a></li>
+        </div>
+        <div sec:authorize="hasRole('ADMIN')">
+        <li th:class="${activeUri=='users'?'active':''}"><a href="#" th:href="@{/user}"> <i class="icon-flask"></i>查询用户 </a></li>
+        </div>
+        <div sec:authorize="hasRole('ADMIN')">
+        <li th:class="${activeUri=='adduser'?'active':''}"><a href="#" th:href="@{/transfer/addUserPage}"> <i class="icon-screen"></i>新增用户 </a></li>
+        </div>
+        <div sec:authorize="hasRole('ADMIN')">
+        <li th:class="${activeUri=='borrowrecord'?'active':''}"><a href="#" th:href="@{/borrowing}"> <i class="icon-mail"></i>借阅记录 </a></li>
+        </div>
+
+        <div sec:authorize="hasRole('USER')">
+            <li th:class="${activeUri=='fbb'?'active':''}"><a href="#" th:href="@{/book/findBooksBorrow}"> <i class="icon-mail"></i>借书 </a></li>
+        </div>
+        <div sec:authorize="hasRole('USER')">
+            <li th:class="${activeUri=='brr'?'active':''}"><a href="#" th:href="@{/transfer/borrowRecordReturn}"> <i class="icon-mail"></i>借记录还 </a></li>
+        </div>
+        <div sec:authorize="hasRole('USER')">
+            <li th:class="${activeUri=='um'?'active':''}"><a href="#" th:href="@{/transfer/userMessage}"> <i class="icon-mail"></i>修改信息 </a></li>
+        </div>
+        <!--<li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
+                class="icon-interface-windows"></i>更多功能</a>
+            <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="#">功能一</a></li>
+                <li><a href="#">功能二</a></li>
+                <li><a href="#">功能三</a></li>
+            </ul>
+        </li>-->
+       <!-- <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page </a></li>-->
+    </ul>
+    <!--<span class="heading">Extras</span>
+    <ul class="list-unstyled">
+        <li><a href="#"> <i class="icon-flask"></i>Demo </a></li>
+        <li><a href="#"> <i class="icon-screen"></i>Demo </a></li>
+        <li><a href="#"> <i class="icon-mail"></i>Demo </a></li>
+        <li><a href="#"> <i class="icon-picture"></i>Demo </a></li>
+    </ul>-->
+</nav>
+</body>
+</html>

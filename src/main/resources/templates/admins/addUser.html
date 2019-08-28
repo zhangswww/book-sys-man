@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bootstrap Material Admin by Bootstrapious.com</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="robots" content="all,follow">
+  <!-- Bootstrap CSS-->
+  <link rel="stylesheet" href="../static/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+  <!-- Font Awesome CSS-->
+  <link rel="stylesheet" href="../static/vendor/font-awesome/css/font-awesome.min.css" th:href="@{/vendor/font-awesome/css/font-awesome.min.css}">
+  <!-- Fontastic Custom icon font-->
+  <link rel="stylesheet" href="../static/css/fontastic.css" th:href="@{/css/fontastic.css}">
+  <!-- Google fonts - Poppins -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+  <!-- theme stylesheet-->
+  <link rel="stylesheet" href="../static/css/style.default.css" th:href="@{/css/style.default.css}" id="theme-stylesheet">
+  <!-- Custom stylesheet - for your changes-->
+  <link rel="stylesheet" href="../static/css/custom.css" th:href="@{/css/custom.css}">
+  <!-- Favicon-->
+  <link rel="shortcut icon" href="../static/img/favicon.ico"  th:href="@{/img/favicon.ico}">
+  <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+  <body>
+    <div class="page">
+      <!-- 引入header -->
+      <div th:replace="commons/header::header"></div>
+
+      <div class="page-content d-flex align-items-stretch"> 
+        <!-- 引入bar -->
+      <!--  <div th:replace="commons/bar::bar"></div>-->
+        <div th:replace="commons/bar::#bar(activeUri='adduser')"></div>
+
+        <div class="content-inner">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">Forms</h2>
+            </div>
+          </header>
+          <!-- Breadcrumb-->
+          <div class="breadcrumb-holder container-fluid">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active">Forms            </li>
+            </ul>
+          </div>
+          <!-- Forms Section-->
+          <section class="forms"> 
+            <div class="container-fluid">
+              <div class="row">
+                <!-- Form Elements -->
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-close">
+                      <div class="dropdown">
+                        <button type="button" id="closeCard5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                        <div aria-labelledby="closeCard5" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                      </div>
+                    </div>
+					
+                    <div class="card-header d-flex align-items-center">
+                      <h3 class="h4">添加用户</h3>
+                    </div>
+                    <div class="card-body">
+                      <form class="form-horizontal" id="addUserForm" th:method="post" th:action="@{/user}">
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">用户名</label>
+                          <div class="col-sm-9">
+                            <input type="text" id="username" name="username" placeholder="username" class="form-control">
+                          </div>
+                        </div>
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">密码</label>
+                          <div class="col-sm-9">
+                            <input type="password" id="password" name="password" placeholder="password" class="form-control">
+                          </div>
+                        </div>
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">邮箱</label>
+                          <div class="col-sm-9">
+                            <input type="email" id="email" name="email" placeholder="email" class="form-control">
+                          </div>
+						 
+                        </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">手机</label>
+                          <div class="col-sm-9">
+                            <input type="text" id="phone" name="phone" placeholder="phone" class="form-control">
+                          </div>
+
+                        </div>
+
+
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">生日</label>
+                          <div class="col-sm-9">
+                            <input type="text" id="birthday" name="birthday" placeholder="birthday" class="form-control">
+                          </div>
+
+                        </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">角色</label>
+                          <div class="col-sm-9">
+                            <select name="role" id="role" class="form-control mb-3">
+                            </select>
+                          </div>
+
+                        </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">性别</label>
+                          <div class="col-sm-9">
+                            <input id="optionsRadios1" type="radio" checked="" value="男" name="gender">
+                            <label for="optionsRadios1">男</label>&nbsp;&nbsp;&nbsp;
+                            <input id="optionsRadios2" type="radio" value="女" name="gender" >
+                            <label for="optionsRadios2">女</label>
+                          </div>
+                        </div>
+
+
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <div class="col-sm-4 offset-sm-3">
+                            <button type="reset" class="btn btn-secondary">清空</button>
+                            <button type="submit" class="btn btn-primary">添加</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- 引入footer -->
+          <div th:replace="commons/footer::footer"></div>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.min.js" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script src="vendor/popper.js/umd/popper.min.js" th:src="@{/vendor/popper.js/umd/popper.min.js}"> </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js" th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js" th:src="@{/vendor/jquery.cookie/jquery.cookie.js}"> </script>
+    <script src="vendor/chart.js/Chart.min.js" th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+    <script src="vendor/jquery-validation/jquery.validate.min.js" th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+    <!-- Main File-->
+    <script src="js/front.js" th:src="@{/js/front.js}"></script>
+<!--    <script src="admins/addUser.js" th:src="@{admin/addUser.js}"></script>-->
+    <script>
+        $(document).ready(function () {
+            //给选择框赋值
+            findAllRoleCategory();
+            $("#addUserForm").validate({
+                rules:{
+                    username:{
+                        required:true
+                    },
+                    password:{
+                        required:true
+                    },
+                    email:{
+                        required:true
+                    },
+                    phone:{
+                        required:true
+                    },
+                    birthday:{
+                        required:true
+                    },
+                    role:{
+                        required:true
+                    }
+                } ,
+                messages:{
+                    username:{
+                        required:"<font color='red'>请输入用户名</font>"
+                    },
+                    password:{
+                        required:"<font color='red'>请输入密码</font>"
+                    },
+                    email:{
+                        required:"<font color='red'>请输入邮箱</font>"
+                    },
+                    phone:{
+                        required:"<font color='red'>请输入手机号</font>"
+                    },
+                    birthday:{
+                        required:"<font color='red'>请输入生日</font>"
+                    },
+                    role:{
+                        required:"<font color='red'>请选择角色</font>"
+                    }
+                }
+            });
+
+        });
+
+        function findAllRoleCategory() {
+            $.ajax({
+                async: false,
+                type: "get",
+                //ajax的url必须写全路径名
+                url: "/role",
+                dataType: "json",
+                success: function (data) {
+                    /*console.log(data);*/
+                    $("select[name='role']").empty();
+                    $("select[name='role']").append('<option value="">——请选择——</option>');
+                    for (var i = 0; i < data.length; i++) {
+                        var html = '<option value="' + data[i].id + '">';
+                        html += data[i].name + '</option>';
+                        $("select[name='role']").append(html);
+                    }
+                },
+                error: function (data) {
+                   /* alert(data.result);*/
+                }
+            });
+        };
+    </script>
+  </body>
+</html>
