@@ -76,23 +76,11 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>Otto</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>Otto</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>Otto</td>
+                            <tr th:each="record:${recordingList}">
+                              <th scope="row" th:text="${record.id}"></th>
+                              <td th:text="${record.bookname}"></td>
+                              <td th:text="${record.dateStr}"></td>
+                              <td th:text="${record.returnDateStr}"></td>
                             </tr>
                           </tbody>
                         </table>
@@ -114,11 +102,11 @@
                       <h3 class="h4">还书</h3>
                     </div>
 					 <div class="card-body">
-                      <form class="form-horizontal">
+                      <form class="form-horizontal" th:action="@{/returnBook}" method="post">
 					 <div class="form-group row">
                           <label class="col-sm-3 form-control-label">请输入还书编号</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control">
+                            <input type="text" id="borrowId" name="borrowId" class="form-control">
                           </div>
                         </div>
 						<div class="line"></div>

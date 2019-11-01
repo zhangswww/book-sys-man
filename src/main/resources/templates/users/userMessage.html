@@ -59,7 +59,7 @@
                     </div>
              
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">查询用户</h3>
+                      <h3 class="h4">自己</h3>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">  
@@ -67,29 +67,25 @@
                           <thead>
                             <tr>
                               <th>姓名</th>
+                              <th>手机</th>
+                              <th>性别</th>
+                              <th>生日</th>
                               <th>邮箱</th>
                               <th>操作</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                            
-                            </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                             
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                             
-                            </tr>
+                          <tr th:each="users:${userInfo}">
+                            <th scope="row" th:text="${users.username}"></th>
+                            <td th:text="${users.phone}"></td>
+                            <td th:text="${users.gender}"></td>
+                            <td th:text="${users.birthday}"></td>
+                            <td th:text="${users.email}"></td>
+                            <td>
+                              <button id="btn_deleteCategory" class="btn btn-sm btn-danger deleteBtn" th:value="${users.id}">修改
+                              </button>
+                            </td>
+                          </tr>
                           </tbody>
                         </table>
                       </div>

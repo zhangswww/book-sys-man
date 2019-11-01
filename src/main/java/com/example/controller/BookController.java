@@ -3,6 +3,8 @@ package com.example.controller;
 import com.example.entity.Book;
 import com.example.entity.BookCategory;
 import com.example.service.BookService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +23,13 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping("/books")
-    public String findAllBook(Model model) {
+    public String findAllBook(@RequestParam(name = "page", required = true, defaultValue = "1")Integer page,
+                              @RequestParam(name = "size", required = true, defaultValue = "4")Integer size,
+                              Model model) {
+        PageHelper.startPage(page, size);
         List<Book> bookList = bookService.findAllBook();
-        model.addAttribute("bookList", bookList);
+        PageInfo pageInfo = new PageInfo(bookList);
+        model.addAttribute("pageInfo", pageInfo);
         return "admins/showBooks";
     }
 

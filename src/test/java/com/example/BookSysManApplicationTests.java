@@ -1,9 +1,11 @@
 package com.example;
 
-import com.example.entity.*;
+import com.example.entity.BorrowRecording;
+import com.example.entity.UserInfo;
 import com.example.mapper.BookMapper;
 import com.example.mapper.UserMapper;
 import com.example.service.RoleService;
+import com.example.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,10 @@ import java.util.List;
 @SpringBootTest
 public class BookSysManApplicationTests {
 
-/*    @Autowired
-    private UserService userService;*/
+/*
+    @Autowired
+    private UserService userService;
+*/
 
     @Autowired
     private RoleService roleService;
@@ -29,9 +33,47 @@ public class BookSysManApplicationTests {
     private BookMapper bookMapper;
 
     @Test
+    public void test1() {
+        UserInfo username = userMapper.findByUsername("zhangsan");
+        System.out.println(username);
+    }
+
+
+
+    @Test
     public void contextLoads() {
-        Integer userId = userMapper.findUsernameByUserId("zhangsan");
-        System.out.println(userId);
+        Integer bookId = bookMapper.findBoIdByBookId(33);
+        //被借图书的数量加1
+        bookMapper.addOneBook(bookId);
+
+
+
+
+
+
+/*
+        UserInfo userInfo = userMapper.findByUsername("lisi");
+        System.out.println(userInfo);
+
+*/
+
+
+
+        /*bookMapper.addOneBook(31);*/
+
+
+   /*     Integer bookId = bookMapper.findBoIdByBookId(33);
+        System.out.println(bookId);*/
+
+
+//        userService.findCurRecording();
+       /* List<BorrowRecording> recordingList = userMapper.findCurRecording(10);
+        for (BorrowRecording borrowRecording : recordingList) {
+            System.out.println(borrowRecording);
+        }*/
+
+       /* Integer userId = userMapper.findUsernameByUserId("zhangsan");
+        System.out.println(userId);*/
 
         /*userMapper.deleteUser(8);*/
        /* List<BorrowRecording> recordingList = userMapper.findBorrowRecording();

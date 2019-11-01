@@ -19,4 +19,10 @@ public interface UserService extends UserDetailsService {
 
     List<BorrowRecording> findBorrowRecording();
 
+    List<BorrowRecording> findCurRecording();
+
+    void returnBook(Integer borrowId);
+
+    UserInfo getCurrentUser();
+
 }

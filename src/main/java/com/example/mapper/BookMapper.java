@@ -34,4 +34,10 @@ public interface BookMapper {
     void borrowBook(BorrowRecording borrowRecording);
 
     void bookLessOne(Integer book_id);
+
+    //根据借书表id查询图书表id
+    Integer findBoIdByBookId(Integer borrowId);
+
+    //图书的数量加1
+    void addOneBook(Integer bookId);
 }

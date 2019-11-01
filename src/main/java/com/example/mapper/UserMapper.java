@@ -21,10 +21,19 @@ public interface UserMapper {
     List<BorrowRecording> findBorrowRecording();
 
     /**
+     * 根据用户id查询用户所借的书
+     * @param userId
+     * @return
+     */
+    List<BorrowRecording> findCurRecording(Integer userId);
+
+    /**
      * 根据用户id查询用户姓名
      * @return
      */
     String findUserIdByUsername(Integer user_id);
 
     Integer findUsernameByUserId(String username);
+
+    void deleteBorrowRecord(Integer borrowId);
 }

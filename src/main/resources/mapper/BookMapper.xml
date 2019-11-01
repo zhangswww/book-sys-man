@@ -68,4 +68,12 @@
         UPDATE book SET book_amount= book_amount-1 WHERE book_id=#{book_id}
     </update>
 
+    <select id="findBoIdByBookId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT book_id FROM borrowingbooks WHERE id=#{borrowId}
+    </select>
+    
+    <update id="addOneBook" parameterType="java.lang.Integer">
+        UPDATE book SET book_amount= book_amount+1 WHERE book_id=#{bookId}
+    </update>
+
 </mapper>

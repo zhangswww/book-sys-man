@@ -32,6 +32,7 @@ public class UserController {
 
     /**
      * 来到主页面
+     *
      * @return
      */
     @PostMapping("/index")
@@ -55,6 +56,7 @@ public class UserController {
 
     /**
      * 登陆页
+     *
      * @return
      */
     @GetMapping("/login")
@@ -76,6 +78,7 @@ public class UserController {
 
     /**
      * 获取所有用户信息
+     *
      * @return
      */
     @GetMapping("/user")
@@ -93,6 +96,7 @@ public class UserController {
 
     /**
      * 借书记录
+     *
      * @return
      */
     @GetMapping("/borrowing")
@@ -102,4 +106,28 @@ public class UserController {
         return "admins/allBorrowingBooksRecord";
     }
 
+    /**
+     * 查询当前登录用户的借书记录
+     *
+     * @return
+     */
+    @GetMapping("/currentRecording")
+    public String currentBorrowRecording(Model model) {
+        List<BorrowRecording> recordingList = userService.findCurRecording();
+        model.addAttribute("recordingList", recordingList);
+        return "users/borrowRecordReturn";
+    }
+
+    @PostMapping("/returnBook")
+    public String returnBook(@RequestParam("borrowId") Integer borrowId) {
+        userService.returnBook(borrowId);
+        return "redirect:currentRecording";
+    }
+
+    @GetMapping("/findCurUser")
+    public String getCurrentUser(Model model) {
+        UserInfo userInfo = userService.getCurrentUser();
+        model.addAttribute("userInfo", userInfo);
+        return "users/userMessage";
+    }
 }

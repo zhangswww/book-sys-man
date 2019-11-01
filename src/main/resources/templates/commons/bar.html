@@ -43,10 +43,10 @@
             <li th:class="${activeUri=='fbb'?'active':''}"><a href="#" th:href="@{/book/findBooksBorrow}"> <i class="icon-mail"></i>借书 </a></li>
         </div>
         <div sec:authorize="hasRole('USER')">
-            <li th:class="${activeUri=='brr'?'active':''}"><a href="#" th:href="@{/transfer/borrowRecordReturn}"> <i class="icon-mail"></i>借记录还 </a></li>
+            <li th:class="${activeUri=='brr'?'active':''}"><a href="#" th:href="@{/currentRecording}"> <i class="icon-mail"></i>借记录还 </a></li>
         </div>
         <div sec:authorize="hasRole('USER')">
-            <li th:class="${activeUri=='um'?'active':''}"><a href="#" th:href="@{/transfer/userMessage}"> <i class="icon-mail"></i>修改信息 </a></li>
+            <li th:class="${activeUri=='um'?'active':''}"><a href="#" th:href="@{/findCurUser}"> <i class="icon-mail"></i>修改信息 </a></li>
         </div>
         <!--<li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
                 class="icon-interface-windows"></i>更多功能</a>

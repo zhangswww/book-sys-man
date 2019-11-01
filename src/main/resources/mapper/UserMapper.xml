@@ -64,4 +64,12 @@
     <select id="findUsernameByUserId" resultType="java.lang.Integer">
         SELECT id FROM USER WHERE username=#{username}
     </select>
+
+    <select id="findCurRecording" parameterType="java.lang.Integer" resultMap="BaseBorrowRecording">
+        SELECT * FROM borrowingbooks WHERE user_id=#{userId}
+    </select>
+
+    <delete id="deleteBorrowRecord" parameterType="java.lang.Integer">
+        DELETE FROM borrowingbooks WHERE id=#{borrowId}
+    </delete>
 </mapper>

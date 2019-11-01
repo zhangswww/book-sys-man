@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
     <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="../static/vendor/bootstrap/css/bootstrap.min.css"
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"
           th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="../static/vendor/font-awesome/css/font-awesome.min.css"
@@ -122,7 +122,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="book:${bookList}">
+                                            <tr th:each="book:${pageInfo.list}">
                                                 <th scope="row" th:text="${book.bookId}"></th>
                                                 <td th:text="${book.bookName}"></td>
                                                 <td th:text="${book.bookAuthor}"></td>
@@ -134,6 +134,36 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="box-footer">
+                                <div class="pull-left">
+                                    <div class="form-group form-inline">
+                                        总共 <p th:text="${pageInfo.pages}"></p> 页，共 <p th:text="${pageInfo.total}"></p> 条数据。 每页
+                                        <input type="text" class="form-control" id="changePageSize" onchange="changePageSize()">
+                                        </input> 条
+                                    </div>
+                                </div>
+
+                                <!--<div class="box-tools pull-right">
+                                    <ul class="pagination">
+                                        <li>${pageInfo.pageSize}
+                                            <a href="/book/books?page=1&size="+"<p></p>"     aria-label="Previous">首页</a>
+                                        </li>
+                                        <li><a href="/book/books?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">上一页</a></li>
+
+                                        <li th:each="pageNums:${pageInfo.pages}">
+                                             <a href="/book/books?page=${pageNum}&size=${pageInfo.pageSize}" th:text="$s{pageNums}"></a>
+                                        </li>
+                                        <li>
+                                            <a href="/book/books?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">下一页</a></li>
+                                        <li>
+                                            <a href="/book/books?page=${pageInfo.pages}&size=${pageInfo.pageSize}" aria-label="Next">尾页</a>
+                                        </li>
+                                    </ul>
+                                </div>-->
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -157,6 +187,15 @@
 
 
 <script>
+    function changePageSize() {
+        //获取下拉框的值
+        var pageSize = $("#changePageSize").val();
+
+        //向服务器发送请求，改变没页显示条数
+        location.href = "/book/books?page=1&size="
+            + pageSize;
+    }
+
     $(document).ready(function () {
         //给选择框赋值
         findAllBookCategory();
